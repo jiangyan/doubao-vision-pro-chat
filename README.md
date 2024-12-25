@@ -1,6 +1,8 @@
 # Doubao Vision Pro Chat
 
-A web application that enables visual conversations powered by the Doubao Vision Pro model. This application allows users to have interactive conversations about images using the advanced capabilities of the doubao-vision-pro-32k model.
+A web application that enables visual conversations powered by multiple vision-language models:
+- Doubao Vision Pro (豆包视觉)
+- Qwen VL Max (通义千问)
 
 ## Features
 
@@ -9,6 +11,10 @@ A web application that enables visual conversations powered by the Doubao Vision
 - 🔄 Real-time Streaming Responses
 - 📱 Modern Responsive Interface
 - 🎨 Material-UI Design System
+- 🔀 Multiple Model Support
+- 📤 Multiple Image Upload Support
+- 📋 Copy/Paste Image Support
+- 🖱️ Drag & Drop Support
 
 ## Quick Start
 
@@ -17,6 +23,7 @@ A web application that enables visual conversations powered by the Doubao Vision
 - Node.js (v14 or higher)
 - npm or yarn
 - ARK API key for accessing the Doubao Vision Pro model
+- Dashscope API key for accessing the Qwen VL Max model
 
 ### Installation
 
@@ -28,6 +35,7 @@ A web application that enables visual conversations powered by the Doubao Vision
 3. Create `.env` file in the root directory:
    ```
    ARK_API_KEY=your_ark_api_key_here
+   DASHSCOPE_API_KEY=your_dashscope_api_key_here
    ```
 
 ### Development
@@ -65,15 +73,26 @@ npm start
 
 ### Backend
 - Node.js with Express
-- OpenAI API client (configured for Doubao Vision Pro)
+- OpenAI API client (configured for both models)
 - Server-Sent Events for streaming responses
 
 ## API Configuration
 
-The application uses the Doubao Vision Pro model:
+The application uses two vision-language models:
+
+### Doubao Vision Pro
 - Model: ep-20241223220835-p7wpl
 - Base URL: https://ark.cn-beijing.volces.com/api/v3
-- Features: Streaming responses for real-time interaction
+
+### Qwen VL Max
+- Model: qwen-vl-max-latest
+- Base URL: https://dashscope.aliyuncs.com/compatible-mode/v1
+
+Both models support:
+- Streaming responses for real-time interaction
+- Multi-turn conversations
+- Multiple image inputs
+- Text and image analysis
 
 ## Available Scripts
 
@@ -89,6 +108,9 @@ The application uses the Doubao Vision Pro model:
 ```
 ├── client/                 # Frontend React application
 │   ├── src/               # Source files
+│   │   ├── App.jsx        # Main application component
+│   │   ├── DoubaoChat.jsx # Doubao Vision Pro chat component
+│   │   ├── QwenChat.jsx   # Qwen VL Max chat component
 │   ├── public/            # Static assets
 │   └── dist/              # Production build output
 ├── server.js              # Express backend server
@@ -101,6 +123,7 @@ The application uses the Doubao Vision Pro model:
 Required environment variables in `.env`:
 ```
 ARK_API_KEY=your_ark_api_key_here
+DASHSCOPE_API_KEY=your_dashscope_api_key_here
 NODE_ENV=development
 PORT=3001
 ```
