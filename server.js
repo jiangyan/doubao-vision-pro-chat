@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Initialize OpenAI clients for both models
 const doubaoClient = new OpenAI({
-  apiKey: process.env.ARK_API_KEY || '***REMOVED***',
+  apiKey: process.env.ARK_API_KEY,
   baseURL: 'https://ark.cn-beijing.volces.com/api/v3',
 });
 
@@ -35,6 +35,17 @@ const qwenClient = new OpenAI({
   apiKey: process.env.DASHSCOPE_API_KEY,
   baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
 });
+
+// Add API key validation
+if (!process.env.ARK_API_KEY) {
+  console.error('Error: ARK_API_KEY is required but not set in environment variables');
+  process.exit(1);
+}
+
+if (!process.env.DASHSCOPE_API_KEY) {
+  console.error('Error: DASHSCOPE_API_KEY is required but not set in environment variables');
+  process.exit(1);
+}
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', mode: process.env.NODE_ENV });
